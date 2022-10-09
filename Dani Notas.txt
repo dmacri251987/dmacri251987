@@ -1,0 +1,13 @@
+Recordar desabilitar la validacion de string en proyecto Net 6
+
+bulky = voluminosa
+brief = breve
+ground = base
+aware = conciente
+
+
+
+
+Investigar- Asp NetCore
+
+Swashbuckle 
