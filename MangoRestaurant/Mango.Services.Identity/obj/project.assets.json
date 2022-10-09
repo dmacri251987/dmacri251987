@@ -2505,11 +2505,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Desarrollo\\Curso Microservicios\\MangoRestaurant\\Mango.Services.Identity\\Mango.Services.Identity.csproj",
+      "projectUniqueName": "D:\\Desarrollo\\Git Proyect\\dmacri251987\\MangoRestaurant\\Mango.Services.Identity\\Mango.Services.Identity.csproj",
       "projectName": "Mango.Services.Identity",
-      "projectPath": "D:\\Desarrollo\\Curso Microservicios\\MangoRestaurant\\Mango.Services.Identity\\Mango.Services.Identity.csproj",
+      "projectPath": "D:\\Desarrollo\\Git Proyect\\dmacri251987\\MangoRestaurant\\Mango.Services.Identity\\Mango.Services.Identity.csproj",
       "packagesPath": "C:\\Users\\DaniM\\.nuget\\packages\\",
-      "outputPath": "D:\\Desarrollo\\Curso Microservicios\\MangoRestaurant\\Mango.Services.Identity\\obj\\",
+      "outputPath": "D:\\Desarrollo\\Git Proyect\\dmacri251987\\MangoRestaurant\\Mango.Services.Identity\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
