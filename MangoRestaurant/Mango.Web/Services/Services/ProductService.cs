@@ -1,6 +1,7 @@
 ﻿using Mango.Web.Models;
 using Mango.Web.Services.IServices;
 
+
 namespace Mango.Web.Services.Services
 {
     public class ProductService : BaseService, IProductService
@@ -18,9 +19,9 @@ namespace Mango.Web.Services.Services
         {
             return await this.SendAsync<T>(new ApiResquest()
             {
-                apiType = SD.ApiType.POST,
+                apiType = Common.SD.ApiType.POST,
                 Data = productDto,
-                url = SD.ProductAPIBase + "api/products",
+                url = Common.SD.ProductAPIBase + "api/products",
                 AccessToken = ""
             });
         }
@@ -29,8 +30,8 @@ namespace Mango.Web.Services.Services
         {
             return await this.SendAsync<T>(new ApiResquest()
             {
-                apiType = SD.ApiType.DELETE,              
-                url = SD.ProductAPIBase + "api/products/" + id,
+                apiType = Common.SD.ApiType.DELETE,              
+                url = Common.SD.ProductAPIBase + "api/products/" + id,
                 AccessToken = ""
             });
         }
@@ -39,8 +40,8 @@ namespace Mango.Web.Services.Services
         {
             return await this.SendAsync<T>(new ApiResquest()
             {
-                apiType = SD.ApiType.GET,
-                url = SD.ProductAPIBase + "api/products/" + id,
+                apiType = Common.SD.ApiType.GET,
+                url = Common.SD.ProductAPIBase + "api/products/" + id,
                 AccessToken = ""
             });
         }
@@ -49,8 +50,8 @@ namespace Mango.Web.Services.Services
         {
             return await this.SendAsync<T>(new ApiResquest()
             {
-                apiType = SD.ApiType.GET,
-                url = SD.ProductAPIBase + "api/products/",
+                apiType = Common.SD.ApiType.GET,
+                url = Common.SD.ProductAPIBase + "api/products/",
                 AccessToken = ""
             });
         }
@@ -59,9 +60,9 @@ namespace Mango.Web.Services.Services
         {
             return await this.SendAsync<T>(new ApiResquest()
             {
-                apiType = SD.ApiType.PUT,
+                apiType = Common.SD.ApiType.PUT,
                 Data = productDto,
-                url = SD.ProductAPIBase + "api/products",
+                url = Common.SD.ProductAPIBase + "api/products",
                 AccessToken = ""
             });
         }

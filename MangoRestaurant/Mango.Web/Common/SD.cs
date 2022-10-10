@@ -1,4 +1,4 @@
-﻿namespace Mango.Web
+﻿namespace Mango.Web.Common
 {
     public static class SD
     {

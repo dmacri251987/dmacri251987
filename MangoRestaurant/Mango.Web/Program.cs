@@ -23,9 +23,8 @@ if (builder.Environment.IsDevelopment())
 }
 
 
-
 builder.Services.AddHttpClient<IProductService, ProductService>();
-SD.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
+Mango.Web.Common.SD.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
 builder.Services.AddScoped<IProductService, ProductService>();
 
 
