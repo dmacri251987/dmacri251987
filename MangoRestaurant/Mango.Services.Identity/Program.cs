@@ -9,11 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-var app = builder.Build();
-
-
 //Configuration DbContext
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionIdentity")));
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
 
 var build = builder.Services.AddIdentityServer(options =>
@@ -30,8 +29,7 @@ var build = builder.Services.AddIdentityServer(options =>
 build.AddDeveloperSigningCredential();
 
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
@@ -47,7 +45,6 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseIdentityServer();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(

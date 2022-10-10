@@ -146,3 +146,4 @@ D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Services.Identity\o
 D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Services.Identity\obj\Debug\net6.0\Mango.Services.Identity.pdb
 D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Services.Identity\obj\Debug\net6.0\Mango.Services.Identity.genruntimeconfig.cache
 D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Services.Identity\obj\Debug\net6.0\ref\Mango.Services.Identity.dll
+D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Services.Identity\bin\Debug\net6.0\libman.json
