@@ -1,0 +1,88 @@
+INSERT INTO [dbo].[AspNetUsers]
+           ([Id]
+           ,[UserName]
+           ,[NormalizedUserName]
+           ,[Email]
+           ,[NormalizedEmail]
+           ,[EmailConfirmed]
+           ,[PasswordHash]
+           ,[SecurityStamp]
+           ,[ConcurrencyStamp]
+           ,[PhoneNumber]
+           ,[PhoneNumberConfirmed]
+           ,[TwoFactorEnabled]
+           ,[LockoutEnd]
+           ,[LockoutEnabled]
+           ,[AccessFailedCount]
+           ,[FirstName]
+           ,[LastName])
+     VALUES
+           ('14bc521e-fc3b-4b02-9b52-9cc8ab399adc'
+           ,'admin1@gmail.com'
+           ,null
+           ,'admin1@gmail.com'
+           ,null
+           ,1
+           ,null
+           ,'ed824486-e067-43a2-ae1e-82bba1befdd3'
+           ,'5e90efc5-f3c1-4842-8cef-59d190a61063'
+           ,'111111111111'
+           ,0
+           ,0
+           ,null
+           ,0
+           ,0
+           ,'Ben'
+           ,'Admin')
+
+
+
+
+
+
+*********************************
+
+
+
+INSERT INTO [dbo].[AspNetUsers]
+           ([Id]
+           ,[UserName]
+           ,[NormalizedUserName]
+           ,[Email]
+           ,[NormalizedEmail]
+           ,[EmailConfirmed]
+           ,[PasswordHash]
+           ,[SecurityStamp]
+           ,[ConcurrencyStamp]
+           ,[PhoneNumber]
+           ,[PhoneNumberConfirmed]
+           ,[TwoFactorEnabled]
+           ,[LockoutEnd]
+           ,[LockoutEnabled]
+           ,[AccessFailedCount]
+           ,[FirstName]
+           ,[LastName])
+     VALUES
+           ('b987f79d-fe7b-4cb0-9cc8-40d75ca018fc'
+           ,'cutomar1@gmail.com'
+           ,null
+           ,'cutomar1@gmail.com'
+           ,null
+           ,1
+           ,null
+           ,'ead577d7-f1e3-4afa-a216-c6b46fab89bc'
+           ,'1dbf86e3-324a-42d7-b262-4883234cb3e0'
+           ,'111111111111'
+           ,0
+           ,0
+           ,null
+           ,0
+           ,0
+           ,'Ben'
+           ,'Cust')
+
+
+
+
+
+

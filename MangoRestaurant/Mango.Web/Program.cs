@@ -16,7 +16,7 @@ y lo llamo a continuacion
 */
 
 //Llamada
-var mvcBuilder =builder.Services.AddRazorPages();
+var mvcBuilder = builder.Services.AddRazorPages();
 if (builder.Environment.IsDevelopment())
 {
     mvcBuilder.AddRazorRuntimeCompilation();
@@ -27,7 +27,28 @@ builder.Services.AddHttpClient<IProductService, ProductService>();
 Mango.Web.Common.SD.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
 builder.Services.AddScoped<IProductService, ProductService>();
 
-
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = "Cookies";
+    options.DefaultChallengeScheme = "oidc";
+}).AddCookie("Cookies",c=>c.ExpireTimeSpan = TimeSpan.FromMinutes(10))
+.AddOpenIdConnect("oidc", options =>
+{
+    options.Authority = builder.Configuration["ServiceUrls:IdentityApi"];
+    options.GetClaimsFromUserInfoEndpoint = true;
+    // Mango.Services.Identity.Common
+    options.ClientId = "mango";
+    // Mango.Services.Identity.Common
+    options.ClientSecret = "secret";
+    // Mango.Services.Identity.Common
+    options.ResponseType = "code";
+    options.TokenValidationParameters.NameClaimType = "name";
+    options.TokenValidationParameters.RoleClaimType = "role";
+    //Mango.Services.Identity.Common ApiScope
+    options.Scope.Add("mango");
+    options.SaveTokens = true;
+});
+    
 
 
 var app = builder.Build();
@@ -44,7 +65,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

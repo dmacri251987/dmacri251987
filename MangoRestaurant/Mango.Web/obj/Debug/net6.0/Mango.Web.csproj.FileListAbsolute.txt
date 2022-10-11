@@ -642,6 +642,7 @@ D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.
 D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.0\refs\System.Xml.XPath.dll
 D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.0\refs\System.Xml.XPath.XDocument.dll
 D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.0\refs\WindowsBase.dll
+D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
 D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
 D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
 D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.0\Microsoft.AspNetCore.Razor.Language.dll
@@ -649,7 +650,15 @@ D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.
 D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.dll
 D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.0\Microsoft.CodeAnalysis.Razor.dll
 D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.0\System.Security.Permissions.dll
 D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.0\cs\Microsoft.CodeAnalysis.resources.dll
 D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.0\de\Microsoft.CodeAnalysis.resources.dll
 D:\Desarrollo\Git Proyect\dmacri251987\MangoRestaurant\Mango.Web\bin\Debug\net6.0\es\Microsoft.CodeAnalysis.resources.dll
