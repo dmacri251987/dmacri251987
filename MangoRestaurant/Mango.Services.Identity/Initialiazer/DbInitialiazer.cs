@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Mango.Services.Identity.Common;
 using System.Security.Claims;
 using IdentityModel;
-
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace Mango.Services.Identity.Initialiazer
 {
@@ -24,7 +25,7 @@ namespace Mango.Services.Identity.Initialiazer
         }
 
         public void Initialize()
-       {
+        {
             if (_roleManager.FindByIdAsync(SD.Admin).Result == null)
             {
                 _roleManager.CreateAsync(new IdentityRole(SD.Admin)).GetAwaiter().GetResult();
@@ -46,18 +47,19 @@ namespace Mango.Services.Identity.Initialiazer
                 LastName = "Admin"
             };
 
-           
+            //PasswordEncrypt();
+
             _userManager.CreateAsync(adminUser, "Admin123").GetAwaiter().GetResult();
             _userManager.AddToRoleAsync(adminUser, SD.Admin).GetAwaiter().GetResult();
 
 
-           var temp1 = _userManager.AddClaimsAsync(adminUser, new Claim[]
-            {
+            var temp1 = _userManager.AddClaimsAsync(adminUser, new Claim[]
+             {
                 new Claim(JwtClaimTypes.Name, adminUser.FirstName + " " + adminUser.LastName),
                 new Claim(JwtClaimTypes.GivenName, adminUser.FirstName ),
                 new Claim(JwtClaimTypes.FamilyName, adminUser.FirstName ),
                 new Claim(JwtClaimTypes.Role, SD.Admin )
-            }).Result;
+             }).Result;
 
             ApplicationUser customerUser = new ApplicationUser()
             {
@@ -81,6 +83,27 @@ namespace Mango.Services.Identity.Initialiazer
                 new Claim(JwtClaimTypes.Role, SD.Customer )
              }).Result;
 
+        }
+
+        private static void PasswordEncrypt()
+        {
+            string? password = "Admin123";
+
+            byte[] salt;
+            byte[] buffer2;
+            if (password == null)
+            {
+                throw new ArgumentNullException("password");
+            }
+            using (Rfc2898DeriveBytes bytes = new Rfc2898DeriveBytes(password, 0x10, 0x3e8))
+            {
+                salt = bytes.Salt;
+                buffer2 = bytes.GetBytes(0x20);
+            }
+            byte[] dst = new byte[0x31];
+            Buffer.BlockCopy(salt, 0, dst, 1, 0x10);
+            Buffer.BlockCopy(buffer2, 0, dst, 0x11, 0x20);
+            var resultado = Convert.ToBase64String(dst);
         }
     }
 }
