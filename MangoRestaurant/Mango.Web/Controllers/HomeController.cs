@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Mango.Web.Controllers
 {
@@ -31,8 +33,9 @@ namespace Mango.Web.Controllers
         }
 
         [Authorize]
-        public IActionResult Login()
+        public async Task<IActionResult> Login()
         {
+           
             return RedirectToAction(nameof(Index));
         }
 

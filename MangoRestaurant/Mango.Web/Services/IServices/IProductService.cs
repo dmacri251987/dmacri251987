@@ -4,11 +4,11 @@ namespace Mango.Web.Services.IServices
 {
     public interface IProductService : IBaseService
     {
-        Task<T> GetAllProductsAsync<T>();
-        Task<T> GetAllProductByIdAsync<T>(int id);
-        Task<T> CreateProductAsync<T>(ProductDto product);
-        Task<T> UpdateProductAsync<T>(ProductDto product);
-        Task<T> DeleteProductAsync<T>(int id);
+        Task<T> GetAllProductsAsync<T>(string token);
+        Task<T> GetAllProductByIdAsync<T>(int id, string token);
+        Task<T> CreateProductAsync<T>(ProductDto product, string token);
+        Task<T> UpdateProductAsync<T>(ProductDto product, string token);
+        Task<T> DeleteProductAsync<T>(int id, string token);
 
     }
 }

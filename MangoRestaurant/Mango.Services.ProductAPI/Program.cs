@@ -5,6 +5,7 @@ using Mango.Services.ProductAPI.Repository;
 using Mango.Services.ProductAPI.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,12 +18,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
 
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Mango,Services.ProductAPI",Version="v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Mango.Services.ProductAPI",Version="v1" });
     c.EnableAnnotations();
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = @"Enter 'Bearer' [space] and your token",
-        Name = "Authorization",
+        Name = HeaderNames.Authorization,
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey,
         Scheme = "Bearer"
@@ -94,8 +95,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+//El orden es importante!
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

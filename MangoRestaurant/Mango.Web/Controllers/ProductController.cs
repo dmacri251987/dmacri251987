@@ -1,5 +1,7 @@
 ﻿using Mango.Web.Models;
 using Mango.Web.Services.IServices;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -18,8 +20,9 @@ namespace Mango.Web.Controllers
         {
 
             List<ProductDto> list = new List<ProductDto>();
-
-            var response = await _productService.GetAllProductsAsync<ResponseDto>();
+            //admin1@gmail.com  - Admin123
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await _productService.GetAllProductsAsync<ResponseDto>(accessToken);
             if (response != null && response.IsSuccess)
             {
                 list = JsonConvert.DeserializeObject<List<ProductDto>>(Convert.ToString(response.Result));
@@ -41,7 +44,8 @@ namespace Mango.Web.Controllers
             if (ModelState.IsValid)
             {
                 List<ProductDto> list = new List<ProductDto>();
-                var response = await _productService.CreateProductAsync<ResponseDto>(model);
+                var accessToken = await HttpContext.GetTokenAsync("access_token");
+                var response = await _productService.CreateProductAsync<ResponseDto>(model, accessToken);
                 if (response != null && response.IsSuccess)
                 {
                     return RedirectToAction(nameof(Index));
@@ -55,7 +59,8 @@ namespace Mango.Web.Controllers
         [HttpGet]       
         public async Task<IActionResult> Edit(int ProductId)
         {
-            var response = await _productService.GetAllProductByIdAsync<ResponseDto>(ProductId);
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await _productService.GetAllProductByIdAsync<ResponseDto>(ProductId, accessToken);
             if (response != null && response.IsSuccess)
             {
                 ProductDto model = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
@@ -72,7 +77,8 @@ namespace Mango.Web.Controllers
             if (ModelState.IsValid)
             {
                 List<ProductDto> list = new List<ProductDto>();
-                var response = await _productService.UpdateProductAsync<ResponseDto>(model);
+                var accessToken = await HttpContext.GetTokenAsync("access_token");
+                var response = await _productService.UpdateProductAsync<ResponseDto>(model, accessToken);
                 if (response != null && response.IsSuccess)
                 {
                     return RedirectToAction(nameof(Index));
@@ -84,9 +90,11 @@ namespace Mango.Web.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int ProductId)
         {
-            var response = await _productService.GetAllProductByIdAsync<ResponseDto>(ProductId);
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await _productService.GetAllProductByIdAsync<ResponseDto>(ProductId, accessToken);
             if (response != null && response.IsSuccess)
             {
                 ProductDto model = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
@@ -97,13 +105,15 @@ namespace Mango.Web.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(ProductDto model)
         {
             if (ModelState.IsValid)
             {
                 List<ProductDto> list = new List<ProductDto>();
-                var response = await _productService.DeleteProductAsync<ResponseDto>(model.ProductId);
+                var accessToken = await HttpContext.GetTokenAsync("access_token");
+                var response = await _productService.DeleteProductAsync<ResponseDto>(model.ProductId, accessToken);
                 if (response != null && response.IsSuccess)
                 {
                     return RedirectToAction(nameof(Index));

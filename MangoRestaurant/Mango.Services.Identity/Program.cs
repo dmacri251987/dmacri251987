@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Mango.Services.Identity.Common;
 using Mango.Services.Identity.Initialiazer;
-
-
+using Duende.IdentityServer.Services;
+using Mango.Services.Identity.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +33,7 @@ build.AddDeveloperSigningCredential();
 
 
 build.Services.AddScoped<IDbInitialiazer, DbInitialiazer>();
+build.Services.AddScoped<IProfileService, ProfileService>();
 
 
 var app = builder.Build();
