@@ -54,7 +54,7 @@ app.UseRouting();
 app.UseIdentityServer();
 app.UseAuthorization();
 
-SeedDatabase();
+//SeedDatabase();
 
 app.MapControllerRoute(
     name: "default",
