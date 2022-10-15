@@ -2408,9 +2408,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Desarrollo\\Git Proyect\\dmacri251987\\MangoRestaurant\\Mango.Services.ProductAPI\\Mango.Services.ProductAPI.csproj",
-      "projectName": "Mango.Services.ProductAPI",
-      "projectPath": "D:\\Desarrollo\\Git Proyect\\dmacri251987\\MangoRestaurant\\Mango.Services.ProductAPI\\Mango.Services.ProductAPI.csproj",
+      "projectUniqueName": "D:\\Desarrollo\\Git Proyect\\dmacri251987\\MangoRestaurant\\Mango.Services.ProductAPI\\Services.ProductAPI.csproj",
+      "projectName": "Services.ProductAPI",
+      "projectPath": "D:\\Desarrollo\\Git Proyect\\dmacri251987\\MangoRestaurant\\Mango.Services.ProductAPI\\Services.ProductAPI.csproj",
       "packagesPath": "C:\\Users\\DaniM\\.nuget\\packages\\",
       "outputPath": "D:\\Desarrollo\\Git Proyect\\dmacri251987\\MangoRestaurant\\Mango.Services.ProductAPI\\obj\\",
       "projectStyle": "PackageReference",

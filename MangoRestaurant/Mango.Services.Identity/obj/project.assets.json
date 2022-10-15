@@ -2442,9 +2442,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Desarrollo\\Git Proyect\\dmacri251987\\MangoRestaurant\\Mango.Services.Identity\\Mango.Services.Identity.csproj",
-      "projectName": "Mango.Services.Identity",
-      "projectPath": "D:\\Desarrollo\\Git Proyect\\dmacri251987\\MangoRestaurant\\Mango.Services.Identity\\Mango.Services.Identity.csproj",
+      "projectUniqueName": "D:\\Desarrollo\\Git Proyect\\dmacri251987\\MangoRestaurant\\Mango.Services.Identity\\Services.Identity.csproj",
+      "projectName": "Services.Identity",
+      "projectPath": "D:\\Desarrollo\\Git Proyect\\dmacri251987\\MangoRestaurant\\Mango.Services.Identity\\Services.Identity.csproj",
       "packagesPath": "C:\\Users\\DaniM\\.nuget\\packages\\",
       "outputPath": "D:\\Desarrollo\\Git Proyect\\dmacri251987\\MangoRestaurant\\Mango.Services.Identity\\obj\\",
       "projectStyle": "PackageReference",

@@ -6,8 +6,7 @@ using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+
 
 /*
 Dani: Esto permite cambiar datos sin recompilar en la vista
@@ -25,7 +24,14 @@ if (builder.Environment.IsDevelopment())
 
 builder.Services.AddHttpClient<IProductService, ProductService>();
 Mango.Web.Common.SD.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
+Mango.Web.Common.SD.ShoppingCartAPIBase = builder.Configuration["ServiceUrls:ShoppingCartApi"];
+
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICartService, CartService>();
+
 
 builder.Services.AddAuthentication(options =>
 {

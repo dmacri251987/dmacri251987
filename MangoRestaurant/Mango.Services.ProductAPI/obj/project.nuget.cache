@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3Q6Gk35AZAXISjxMlz34YecZ7YM3RD0nnRSjPSHQZ/vCUy98hc0dxIoQbBZhKiyeU5mzEqlYgnrTugWSCj/Jnw==",
+  "dgSpecHash": "+4TFPO+rtyO1JeQRyjXUVStp+6Qwp30OjMA4YIyy14FBE9zeyDhF0HlnehhJ92V4MZcD1uy51BxkkfnJkiDEBw==",
   "success": true,
-  "projectFilePath": "D:\\Desarrollo\\Git Proyect\\dmacri251987\\MangoRestaurant\\Mango.Services.ProductAPI\\Mango.Services.ProductAPI.csproj",
+  "projectFilePath": "D:\\Desarrollo\\Git Proyect\\dmacri251987\\MangoRestaurant\\Mango.Services.ProductAPI\\Services.ProductAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DaniM\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\DaniM\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

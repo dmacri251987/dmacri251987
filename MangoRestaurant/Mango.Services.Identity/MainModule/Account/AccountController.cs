@@ -477,6 +477,7 @@ namespace IdentityServerHost.Quickstart.UI
             return vm;
         }
 
+       
         private async Task<LoggedOutViewModel> BuildLoggedOutViewModelAsync(string logoutId)
         {
             // get context information (client name, post logout redirect URI and iframe for federated signout)
