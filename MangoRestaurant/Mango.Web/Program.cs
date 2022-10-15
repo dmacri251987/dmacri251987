@@ -3,6 +3,7 @@ using Mango.Web.Services.IServices;
 using Mango.Web.Services.Services;
 using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,6 +49,8 @@ builder.Services.AddAuthentication(options =>
     options.ClientSecret = "secret";
     // Mango.Services.Identity.Common
     options.ResponseType = "code";
+    options.ClaimActions.MapJsonKey("role", "role", "role");
+    options.ClaimActions.MapJsonKey("sub", "sub", "sub");
     options.TokenValidationParameters.NameClaimType = "name";
     options.TokenValidationParameters.RoleClaimType = "role";
     //Mango.Services.Identity.Common ApiScope

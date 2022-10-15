@@ -11,3 +11,8 @@ aware = conciente
 Investigar- Asp NetCore
 
 Swashbuckle 
+
+
+
+Reset Identity SqlServer
+DBCC CHECKIDENT ([CartDetails], RESEED, 0)
