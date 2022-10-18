@@ -44,7 +44,10 @@ namespace Mango.Web.Controllers
             if (response != null)
             {
                 model = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
+                
             }
+           
+           
             return View(model);
         }
 
@@ -88,6 +91,7 @@ namespace Mango.Web.Controllers
             }
 
             return View(productDto);
+            //return RedirectToAction(nameof(Index), "Cart");
         }
 
 

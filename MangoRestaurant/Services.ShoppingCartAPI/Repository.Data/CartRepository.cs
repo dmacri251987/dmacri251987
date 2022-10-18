@@ -57,7 +57,7 @@ namespace Services.ShoppingCartAPI.Repository.Data
                 await _db.SaveChangesAsync();
                 cart.CartDetails.FirstOrDefault().CartHeaderId = cart.CartHeader.CartHeaderId;
                 //cart.CartDetails.FirstOrDefault().Product = null;
-                cart.CartDetails.FirstOrDefault().ProductId = _db.CartDetails.AsNoTracking().OrderByDescending(x => x.ProductId).Select(x => x.ProductId).FirstOrDefault();
+                cart.CartDetails.FirstOrDefault().ProductId = cartDto.CartDetails.FirstOrDefault().ProductId;
                 _db.CartDetails.Add(cart.CartDetails.FirstOrDefault());
                 await _db.SaveChangesAsync();
             }
@@ -74,15 +74,16 @@ namespace Services.ShoppingCartAPI.Repository.Data
                     //create details
                     cart.CartDetails.FirstOrDefault().CartHeaderId = cartHeaderFromDb.CartHeaderId;
                     cart.CartDetails.FirstOrDefault().Product = null;
-                    cart.CartDetails.FirstOrDefault().ProductId = _db.CartDetails.AsNoTracking().OrderByDescending(x => x.ProductId).Select(x=>x.ProductId).FirstOrDefault();
+                    cart.CartDetails.FirstOrDefault().ProductId = cart.CartDetails.FirstOrDefault().ProductId;
                     _db.CartDetails.Add(cart.CartDetails.FirstOrDefault());
                     await _db.SaveChangesAsync();
                 }
                 else
                 {
                     //update the count / cart details
-                    cart.CartDetails.FirstOrDefault().Product = null;
+                    //cart.CartDetails.FirstOrDefault().Product = null;
                     cart.CartDetails.FirstOrDefault().Count += cartDetailsFromDb.Count;
+                    cart.CartDetails.FirstOrDefault().ProductId = prodInDb.ProductId;
                     _db.CartDetails.Update(cart.CartDetails.FirstOrDefault());
                     await _db.SaveChangesAsync();
                 }
@@ -99,7 +100,7 @@ namespace Services.ShoppingCartAPI.Repository.Data
                 CartHeader = await _db.CartHeaders.FirstOrDefaultAsync(u => u.UserId == userId)
             };
 
-            cart.CartDetails = _db.CartDetails.Where(u => u.CartDetailsId == cart.CartHeader.CartHeaderId).Include(u => u.Product);
+            cart.CartDetails = _db.CartDetails.Where(u => u.CartHeaderId == cart.CartHeader.CartHeaderId).Include(u => u.Product);
 
             return _mapper.Map<CartDto>(cart);
         }
