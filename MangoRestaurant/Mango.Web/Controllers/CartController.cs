@@ -23,6 +23,7 @@ namespace Mango.Web.Controllers
 
             return View(await LoadCartDtoLoggedUser());
         }
+     
 
 
         public async Task<IActionResult> Remove(int cartDetailsID)
@@ -31,7 +32,43 @@ namespace Mango.Web.Controllers
             var acessToken = await HttpContext.GetTokenAsync("acess_token");
             var response = await _cartService.RemoveFromCartAsync<ResponseDto>(cartDetailsID, acessToken);
 
-           
+
+            if (response != null && response.IsSuccess)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("ApplyCoupon")]
+        public async Task<IActionResult> ApplyCoupon(CartDto cartDto)
+        {
+
+            var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
+            var acessToken = await HttpContext.GetTokenAsync("acess_token");
+            var response = await _cartService.ApplyCouponAsync<ResponseDto>(cartDto, acessToken);
+
+
+            if (response != null && response.IsSuccess)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("RemoveCoupon")]
+        public async Task<IActionResult> RemoveCoupon(CartDto cartDto)
+        {
+
+            var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
+            var acessToken = await HttpContext.GetTokenAsync("acess_token");
+            var response = await _cartService.RemoveCouponAsync<ResponseDto>(cartDto.CartHeader.UserId, acessToken);
+
+
             if (response != null && response.IsSuccess)
             {
                 return RedirectToAction(nameof(Index));
@@ -41,9 +78,10 @@ namespace Mango.Web.Controllers
         }
 
 
+
         private async Task<CartDto> LoadCartDtoLoggedUser()
         {
-            var userId = User.Claims.Where(u=>u.Type == "sub")?.FirstOrDefault()?.Value;
+            var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;
             var acessToken = await HttpContext.GetTokenAsync("acess_token");
             var response = await _cartService.GetCartByUserIdAsync<ResponseDto>(userId, acessToken);
 
