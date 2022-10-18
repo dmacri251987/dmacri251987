@@ -18,9 +18,10 @@ namespace Mango.Services.ProductAPI.Controllers
             this._response = new ResponseDto();
         }
 
-       
-        [HttpGet]     
-        public async Task<ResponseDto> Get()
+
+
+        [HttpGet("GetProducts")]
+        public async Task<ResponseDto> GetAll()
         {
             try
             {
@@ -35,10 +36,10 @@ namespace Mango.Services.ProductAPI.Controllers
             return _response;
         }
 
-        [HttpGet]
+
         [Authorize]
-        [Route("{id}")]
-        public async Task<ResponseDto> Get(int id)
+        [HttpGet("GetProduct/{id}")]
+        public async Task<ResponseDto> GetById(int id)
         {
             try
             {
@@ -54,9 +55,10 @@ namespace Mango.Services.ProductAPI.Controllers
         }
 
 
-        [HttpPost]
+       
         [Authorize]
-        public async Task<ResponseDto> Post([FromBody] ProductDto productDto)
+        [HttpPost("CreateProduct")]
+        public async Task<ResponseDto> Create([FromBody] ProductDto productDto)
         {
             try
             {
@@ -73,9 +75,10 @@ namespace Mango.Services.ProductAPI.Controllers
 
 
 
-        [HttpPut]
+
         [Authorize]
-        public async Task<ResponseDto> Put([FromBody] ProductDto productDto)
+        [HttpPut("UpdateProduct")]
+        public async Task<ResponseDto> Update([FromBody] ProductDto productDto)
         {
             try
             {
@@ -91,9 +94,9 @@ namespace Mango.Services.ProductAPI.Controllers
         }
 
 
-        [HttpDelete]
+     
         [Authorize(Roles = "Admin")]
-        [Route("{id}")]
+        [HttpDelete("DeleteProduct/{id}")]
         public async Task<ResponseDto> Delete(int id)
         {
             try

@@ -21,7 +21,7 @@ namespace Mango.Web.Services.Services
             {
                 apiType = Common.SD.ApiType.POST,
                 Data = productDto,
-                url = Common.SD.ProductAPIBase + "api/products",
+                url = Common.SD.ProductAPIBase + "api/products/CreateProduct",
                 AccessToken = token
             });
         }
@@ -31,7 +31,7 @@ namespace Mango.Web.Services.Services
             return await this.SendAsync<T>(new ApiResquest()
             {
                 apiType = Common.SD.ApiType.DELETE,              
-                url = Common.SD.ProductAPIBase + "api/products/" + id,
+                url = Common.SD.ProductAPIBase + "api/products/DeleteProduct" + id,
                 AccessToken = token
             });
         }
@@ -41,7 +41,7 @@ namespace Mango.Web.Services.Services
             return await this.SendAsync<T>(new ApiResquest()
             {
                 apiType = Common.SD.ApiType.GET,
-                url = Common.SD.ProductAPIBase + "api/products/" + id,
+                url = Common.SD.ProductAPIBase + "api/products/GetProduct/" + id,
                 AccessToken = token
             });
         }
@@ -51,7 +51,7 @@ namespace Mango.Web.Services.Services
             return await this.SendAsync<T>(new ApiResquest()
             {
                 apiType = Common.SD.ApiType.GET,
-                url = Common.SD.ProductAPIBase + "api/products/",
+                url = Common.SD.ProductAPIBase + "api/products/GetProducts",
                 AccessToken = token
             });
         }
@@ -62,7 +62,7 @@ namespace Mango.Web.Services.Services
             {
                 apiType = Common.SD.ApiType.PUT,
                 Data = productDto,
-                url = Common.SD.ProductAPIBase + "api/products",
+                url = Common.SD.ProductAPIBase + "api/products/UpdateProduct",
                 AccessToken = token
             });
         }

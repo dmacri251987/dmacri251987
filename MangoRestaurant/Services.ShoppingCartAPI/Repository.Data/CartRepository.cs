@@ -56,7 +56,7 @@ namespace Services.ShoppingCartAPI.Repository.Data
                 _db.CartHeaders.Add(cart.CartHeader);
                 await _db.SaveChangesAsync();
                 cart.CartDetails.FirstOrDefault().CartHeaderId = cart.CartHeader.CartHeaderId;
-                //cart.CartDetails.FirstOrDefault().Product = null;
+                cart.CartDetails.FirstOrDefault().Product = null;
                 cart.CartDetails.FirstOrDefault().ProductId = cartDto.CartDetails.FirstOrDefault().ProductId;
                 _db.CartDetails.Add(cart.CartDetails.FirstOrDefault());
                 await _db.SaveChangesAsync();
