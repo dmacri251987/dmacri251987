@@ -124,20 +124,17 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": [ "mango" ]
-      },
+      "DownstreamPathTemplate": "/api/cart/RemoveCoupon",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
           "Port": 7297
         }
       ],
-      "DownstreamPathTemplate": "/api/cart/RemoveCoupon",
-      "DownstreamScheme": "https",
-      "UpstreamHttpMethod": [ "POST" ],
-      "UpstreamPathTemplate": "/api/cart/RemoveCoupon"
+      "UpstreamPathTemplate": "/api/cart/RemoveCoupon",
+      "UpstreamHttpMethod": [ "POST" ]
+
     },
     {
       "DownstreamPathTemplate": "/api/cart/RemoveCart",
@@ -149,11 +146,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/cart/RemoveCart",
-      "UpstreamHttpMethod": [ "DELETE" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": [ "mango" ]
-      }
+      "UpstreamHttpMethod": [ "DELETE" ]
 
     },
     {
@@ -184,11 +177,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/coupon/{code}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": [ "mango" ]
-      }
+      "UpstreamHttpMethod": [ "GET" ]
     }
 
 
