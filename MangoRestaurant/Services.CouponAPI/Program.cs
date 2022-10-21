@@ -5,6 +5,8 @@ using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 using Services.CouponAPI;
 using Services.CouponAPI.DbContexts;
+using Services.CouponAPI.Repository.Business;
+using Services.CouponAPI.Repository.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
@@ -23,7 +25,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
 // Add services to the container.
-//builder.Services.AddScoped<IcartRepository, CartRepository>();
+builder.Services.AddScoped<ICouponRepository, CouponRepository>();
 
 
 

@@ -26,13 +26,13 @@ if (builder.Environment.IsDevelopment())
 builder.Services.AddHttpClient<IProductService, ProductService>();
 Mango.Web.Common.SD.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
 Mango.Web.Common.SD.ShoppingCartAPIBase = builder.Configuration["ServiceUrls:ShoppingCartApi"];
-
+Mango.Web.Common.SD.CouponAPIBase = builder.Configuration["ServiceUrls:CouponApi"];
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICartService, CartService>();
-
+builder.Services.AddScoped<ICouponService, CouponService>();
 
 builder.Services.AddAuthentication(options =>
 {
