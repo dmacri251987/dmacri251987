@@ -3,9 +3,8 @@ using Mango.Web.Services.IServices;
 
 namespace Mango.Web.Services.Services
 {
-    public class CouponService :BaseService, ICouponService
+    public class CouponService : BaseService, ICouponService
     {
-
         private readonly IHttpClientFactory _clientFactory;
 
         public CouponService(IHttpClientFactory clientFactory) : base(clientFactory)
@@ -24,7 +23,6 @@ namespace Mango.Web.Services.Services
                 AccessToken = token
 
             });
-
         }
     }
 }

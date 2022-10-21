@@ -32,7 +32,7 @@ Mango.Web.Common.SD.CouponAPIBase = builder.Configuration["ServiceUrls:CouponApi
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICartService, CartService>();
-
+builder.Services.AddScoped<ICouponService, CouponService>();
 
 builder.Services.AddAuthentication(options =>
 {

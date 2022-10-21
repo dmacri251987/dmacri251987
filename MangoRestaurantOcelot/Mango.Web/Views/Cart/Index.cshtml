@@ -83,6 +83,10 @@
                         </div>
                         <div class="col-6 text-end">
                             <span class="text-danger" style="font-size:21px;">  Total: $@Model.CartHeader.OrderTotal <br /></span>
+                            @if (Model.CartHeader.DiscountTotal > 0)
+                            {
+                                <span class="text-success">Descuento: $@Model.CartHeader.DiscountTotal</span>
+                            }
                         </div>
                     </div>
                 </div>

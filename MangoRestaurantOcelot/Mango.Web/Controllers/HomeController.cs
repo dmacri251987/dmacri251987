@@ -90,10 +90,6 @@ namespace Mango.Web.Controllers
                 RedirectToAction(nameof(Index));
             }
 
-            productDto.Name = cartDetails.Product.Name;
-            productDto.Price = cartDetails.Product.Price;
-            productDto.Description = cartDetails.Product.Description;
-            productDto.ImageUrl = cartDetails.Product.ImageUrl;
             return View(productDto);
             //return RedirectToAction(nameof(Index), "Cart");
         }
