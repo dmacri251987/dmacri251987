@@ -50,6 +50,8 @@ namespace WebApp.Services.Services
             });
         }
 
+
+
         public async Task<T> GetProductsAsync<T>()
         {
             return await this.SendAsync<T>(new ApiResquest
@@ -58,7 +60,9 @@ namespace WebApp.Services.Services
                 url = StaticDetails.ProductAPIBase + "api/Product/GetProducts"
 
             });
-        }       
+        }
+
+    
 
         public async Task<T> UpdateProductAsync<T>(ProductDto product)
         {

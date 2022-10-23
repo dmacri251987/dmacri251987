@@ -1,4 +1,4 @@
-using ApiGateway.Aggregators;
+using ApiGateway.Aggregators.ProductAggregators;
 using ApiGateway.Handlers;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
@@ -17,6 +17,7 @@ builder.Configuration.AddJsonFile("ocelot.json",optional:false,reloadOnChange:tr
 
 builder.Services.AddOcelot()
     .AddSingletonDefinedAggregator<ProductCategoriesAggregator>()
+    .AddSingletonDefinedAggregator<ProductCategoriesByIdCategoryAggregator>()
     .AddDelegatingHandler<NoEncodingHandler>(true);
 
 var app = builder.Build();

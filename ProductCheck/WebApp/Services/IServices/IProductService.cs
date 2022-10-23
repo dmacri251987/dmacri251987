@@ -8,6 +8,7 @@ namespace WebApp.Services.IServices
         Task<T> GetProductByIdAsync<T>(int id);
         Task<T> CreateProductAsync<T>(ProductDto product);
         Task<T> UpdateProductAsync<T>(ProductDto product);
-        Task<T> DeleteProductAsync<T>(int id);
+        Task<T> DeleteProductAsync<T>(int id);        
+
     }
 }

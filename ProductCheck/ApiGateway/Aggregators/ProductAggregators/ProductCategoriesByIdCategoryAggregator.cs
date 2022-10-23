@@ -1,40 +1,47 @@
 ﻿using ApiGateway.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
 using Ocelot.Middleware;
 using Ocelot.Multiplexer;
-using System.Linq;
 using System.Net.Http.Headers;
 
-namespace ApiGateway.Aggregators
+namespace ApiGateway.Aggregators.ProductAggregators
 {
-    public class ProductCategoriesAggregator : IDefinedAggregator
+    public class ProductCategoriesByIdCategoryAggregator : IDefinedAggregator
     {
         public async Task<DownstreamResponse> Aggregate(List<HttpContext> responses)
         {
+            ResponseDto _response = new ResponseDto();
             try
             {
-                
-                var productsResponseContent = await responses[0].Items.DownstreamResponse().Content.ReadAsStringAsync();              
-                var categoriesResponseContent = await responses[1].Items.DownstreamResponse().Content.ReadAsStringAsync();
 
+                var productsResponseContent = await responses[0].Items.DownstreamResponse().Content.ReadAsStringAsync();
+                var categoriesResponseContent = await responses[1].Items.DownstreamResponse().Content.ReadAsStringAsync();
+              
 
                 var products = JsonConvert.DeserializeObject<ResponseDto>(productsResponseContent);
                 var categories = JsonConvert.DeserializeObject<ResponseDto>(categoriesResponseContent);
 
 
                 var objProduct = JsonConvert.DeserializeObject<List<ProductDto>>(Convert.ToString(products.Result)).ToList();
-                var objCategory = JsonConvert.DeserializeObject<List<CategoryDto>>(Convert.ToString(categories.Result)).ToList();
+                var objCategory = JsonConvert.DeserializeObject<CategoryDto>(Convert.ToString(categories.Result));
 
                 objProduct.ToList().ForEach(prod =>
                 {
-                    prod.Categories.AddRange(objCategory.Where(a => a.CategoryID == prod.CategoryID));
+                    
+                    if (prod.CategoryID == objCategory.CategoryID)
+                    {                       
+                        prod.Categories.Add(objCategory);
+                      
+                    }
+
                 });
 
+               
+                _response.Result = objProduct;
+                _response.IsSuccess = true;
 
-                var jsonString = JsonConvert.SerializeObject(products, Formatting.Indented, new JsonConverter[] { new StringEnumConverter() });
-
+                var jsonString = JsonConvert.SerializeObject(_response, Formatting.Indented, new JsonConverter[] { new StringEnumConverter() });
                 var stringContent = new StringContent(jsonString)
                 {
                     Headers = { ContentType = new MediaTypeHeaderValue("application/json") }
@@ -43,12 +50,9 @@ namespace ApiGateway.Aggregators
             }
             catch (Exception ex)
             {
-                var Ex = ex.ToString();
+                _response.ErrorMessages = new List<string> { ex.ToString()};
                 throw;
             }
-         
-          
-
         }
     }
 }

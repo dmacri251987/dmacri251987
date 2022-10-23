@@ -108,6 +108,24 @@ namespace Services.ProductAPI.Controllers
         }
 
 
+        [HttpGet("GetProductByIdCategory/{id}")]
+        public async Task<ActionResult<ResponseDto>> GetProductByIdCategory(int id)
+        {
+
+            try
+            {
+                IEnumerable<ProductDto> productDtos = new List<ProductDto>();
+                productDtos = await _productRepository.GetProductByIdCategoryAsync(id);
+                _response.Result = productDtos;
+            }
+            catch (Exception ex)
+            {
+
+                _response.ErrorMessages = new List<string>() { ex.ToString() };
+                return BadRequest(_response);
+            }
+            return Ok(_response);
+        }
 
 
         [HttpDelete("DeleteProduct/{id}")]

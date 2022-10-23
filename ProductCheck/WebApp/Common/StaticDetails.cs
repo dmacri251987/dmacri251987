@@ -5,7 +5,7 @@
       
         public static string ProductAPIBase { get; set; }
         public static string CategoryAPIBase { get; set; }
-     
+        public static string GatewayAPIBase { get; set; }
         public enum ApiType
         {
             GET,

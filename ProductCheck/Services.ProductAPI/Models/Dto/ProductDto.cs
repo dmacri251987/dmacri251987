@@ -4,7 +4,9 @@ namespace Services.ProductAPI.Models.Dto
 {
     public class ProductDto
     {
-        
+
+
+      
 
         public int ProductID { get; set; }
 
@@ -18,6 +20,6 @@ namespace Services.ProductAPI.Models.Dto
         public short? UnitsOnOrder { get; set; }
         public short? ReorderLevel { get; set; }
         public bool Discontinued { get; set; }
-
+        public List<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
     }
 }

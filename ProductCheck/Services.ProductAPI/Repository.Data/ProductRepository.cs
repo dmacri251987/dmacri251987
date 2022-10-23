@@ -95,6 +95,23 @@ namespace Services.ProductAPI.Repository.Data
             }
         }
 
+        public async Task<IEnumerable<ProductDto>> GetProductByIdCategoryAsync(int id)
+        {
+            try
+            {
+
+                List<Product> product = await _db.DMProductsAPI.Where(x => x.CategoryID == id).ToListAsync();
+                return _autoMapper.Map<List<ProductDto>>(product);
+
+            }
+            catch (Exception ex)
+            {
+                //_logger.LogError("Error al buscar producto:{0} ", ex.ToString());
+                return new List<ProductDto>();
+
+            }
+        }
+
         public async Task<IEnumerable<ProductDto>> GetProductsAsync()
         {
             try
