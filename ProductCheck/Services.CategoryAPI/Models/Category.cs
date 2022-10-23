@@ -13,7 +13,7 @@ namespace Services.CategoryAPI.Models
      
         public string Description { get; set; }
 
-        [Required(AllowEmptyStrings =true)]
+       
         public byte[] Picture { get; set; }
 
 
