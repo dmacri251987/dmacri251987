@@ -1,0 +1,164 @@
+{
+  "Aggregates": [
+    {
+      "UpstreamPathTemplate": "/api/ProductCategories",
+      "RouteKeys": [ "GetProducts", "getCategories" ],
+      "Aggregator": "ProductCategoriesAggregator"
+    }
+  ],
+  "Routes": [
+    //ProductApi
+    {
+      "DownstreamPathTemplate": "/api/Product/GetProducts",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7193
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Product/GetProducts",
+      "UpstreamHttpMethod": [ "Get" ],
+      "key": "GetProducts"
+
+    },
+    {
+
+      "DownstreamPathTemplate": "/api/Product/GetProductById/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7193
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Product/GetProductById/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+
+    },
+
+    {
+
+      "DownstreamPathTemplate": "/api/Product/CreateProduct",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7193
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Product/CreateProduct",
+      "UpstreamHttpMethod": [ "Post" ]
+
+    },
+    {
+
+      "DownstreamPathTemplate": "/api/Product/UpdateProduct",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7193
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Product/UpdateProduct",
+      "UpstreamHttpMethod": [ "Put" ]
+
+    },
+    {
+
+      "DownstreamPathTemplate": "/api/Product/DeleteProduct/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7193
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Product/DeleteProduct/{id}",
+      "UpstreamHttpMethod": [ "Delete" ]
+
+    },
+    //CategoryApi
+    {
+      "DownstreamPathTemplate": "/api/Category/GetCategories",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7017
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Category/GetCategories",
+      "UpstreamHttpMethod": [ "Get" ],
+      "key": "getCategories"
+    },
+    {
+
+      "DownstreamPathTemplate": "/api/Category/GetCategoryById/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7017
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Category/GetCategoryById/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+
+    },
+
+    {
+
+      "DownstreamPathTemplate": "/api/Category/CreateCategory",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7017
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Category/CreateCategory",
+      "UpstreamHttpMethod": [ "Post" ]
+
+    },
+    {
+
+      "DownstreamPathTemplate": "/api/Category/UpdateCategory",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7017
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Category/UpdateCategory",
+      "UpstreamHttpMethod": [ "Put" ]
+
+    },
+    {
+
+      "DownstreamPathTemplate": "/api/Category/DeleteCategory/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7017
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Category/DeleteCategory/{id}",
+      "UpstreamHttpMethod": [ "Delete" ]
+
+    }
+  ],
+
+  "GlobalConfiguration": {
+
+    "BaseUrl": "https://localhost:7030"
+  }
+}
+
+
+
+//category:7017
+//product: 7193

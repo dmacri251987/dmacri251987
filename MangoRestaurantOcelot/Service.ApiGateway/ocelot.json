@@ -1,4 +1,13 @@
 {
+
+  "Aggregates": [
+
+    {
+      "UpstreamPathTemplate": "/api/productsCartByIdUser",
+      "RouteKeys": [ "allProduct", "getCartById" ],
+      "Aggregator": "ProductCartByUserAggregator"
+    }
+  ],
   "Routes": [
     {
       //PRODUCT - API
@@ -13,7 +22,8 @@
         }
       ],
       "UpstreamPathTemplate": "/api/products/GetProducts",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [ "GET" ],
+      "Key": "allProduct"
     },
     {
       "DownstreamPathTemplate": "/api/products/GetProduct/{id}",
@@ -121,7 +131,8 @@
         }
       ],
       "UpstreamPathTemplate": "/api/cart/getCart/{userId}",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [ "GET" ],
+      "Key": "getCartById"
     },
     {
       "DownstreamPathTemplate": "/api/cart/RemoveCoupon",
