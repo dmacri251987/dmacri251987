@@ -68,7 +68,7 @@ namespace WebApp.Services.Services
         {
             return await this.SendAsync<T>(new ApiResquest
             {
-                apiType = StaticDetails.ApiType.POST,
+                apiType = StaticDetails.ApiType.PUT,
                 Data = product,
                 url = StaticDetails.ProductAPIBase + "api/Product/UpdateProduct"
 

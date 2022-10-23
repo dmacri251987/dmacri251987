@@ -15,7 +15,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IGatewayService, GatewayServices>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
-
+var mvcBuilder = builder.Services.AddRazorPages();
+if (builder.Environment.IsDevelopment())
+{
+    mvcBuilder.AddRazorRuntimeCompilation();
+}
 
 var app = builder.Build();
 

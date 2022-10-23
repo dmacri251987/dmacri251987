@@ -41,7 +41,7 @@
                 <th>
                     Discontinued
                 </th>
-                @*<th></th>*@
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -55,7 +55,7 @@
                         @item.SupplierID
                     </td>
                     <td>
-                        $@item.CategoryID
+                        @item.CategoryID
                     </td>
                     <td>
                         @item.QuantityPerUnit
@@ -64,7 +64,7 @@
                         @item.UnitPrice
                     </td>
                     <td>
-                        $@item.UnitsInStock
+                        @item.UnitsInStock
                     </td>
                     <td>
                         @item.UnitsOnOrder
@@ -73,16 +73,25 @@
                         @item.ReorderLevel
                     </td>
                     <td>
-                        $@item.Discontinued
+
+                        @if(item.Discontinued){
+                         <span>Si</span>
+                        }
+                        else
+                        {
+                            <span>No</span>
+                        }
+
+
                     </td>
-                    @*      <td>
-                <a asp-action="Edit" class="btn btn-success" asp-route-productId="@item.ProductId">
-                <i class="fas fa-edit"></i>
-                </a>
-                <a asp-action="Delete" class="btn btn-danger" asp-route-productId="@item.ProductId">
-                <i class="fas fa-trash"></i>
-                </a>
-                </td>*@
+                    <td>
+                        <a asp-action="Edit" class="btn btn-success" asp-route-productId="@item.ProductID">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a asp-action="GetDelete" asp-controller="Product" class="btn btn-danger" asp-route-productId="@item.ProductID">
+                           <i class="bi bi-trash-fill"></i>
+                        </a>
+                    </td>
                 </tr>
             }
         </tbody>
