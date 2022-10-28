@@ -22,8 +22,9 @@ namespace Mango.Web.Controllers
             _cartServices = cartService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
-        {                 
+        {
 
             List<ProductDto> list = new();
             var response = await _productService.GetAllProductsAsync<ResponseDto>("");
@@ -44,10 +45,10 @@ namespace Mango.Web.Controllers
             if (response != null)
             {
                 model = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
-                
+
             }
-           
-           
+
+
             return View(model);
         }
 
@@ -61,7 +62,7 @@ namespace Mango.Web.Controllers
             {
                 CartHeader = new CartHeaderDto()
                 {
-                    UserId = User.Claims.Where(u=>u.Type=="sub")?.FirstOrDefault()?.Value
+                    UserId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value
                 }
             };
 
@@ -83,15 +84,12 @@ namespace Mango.Web.Controllers
             cartDetailsDtos.Add(cartDetails);
             cartDto.CartDetails = cartDetailsDtos;
 
-            
-            var addToCartResp = await _cartServices.AddToCartAsync<ResponseDto>(cartDto, accessToken);
-            if (addToCartResp != null && addToCartResp.IsSuccess)
-            {
-                RedirectToAction(nameof(Index));
-            }
 
-            return View(productDto);
-            //return RedirectToAction(nameof(Index), "Cart");
+            var addToCartResp = await _cartServices.AddToCartAsync<ResponseDto>(cartDto, accessToken);
+
+
+           return RedirectToAction(nameof(Index));
+
         }
 
 

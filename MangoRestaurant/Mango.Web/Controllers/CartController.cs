@@ -20,13 +20,39 @@ namespace Mango.Web.Controllers
             _couponService = couponService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
 
             return View(await LoadCartDtoLoggedUser());
         }
-     
 
+
+        public async Task<IActionResult> Confirmation()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> Checkout(CartDto cartDto)
+        {
+
+            try
+            {
+                var acessToken = await HttpContext.GetTokenAsync("acess_token");
+                var response = await _cartService.Checkout<ResponseDto>(cartDto.CartHeader, acessToken);
+                return RedirectToAction(nameof(Confirmation));
+
+
+            }
+            catch (Exception ex)
+            {
+
+                return View(cartDto);
+            }
+        }
 
         public async Task<IActionResult> Remove(int cartDetailsID)
         {

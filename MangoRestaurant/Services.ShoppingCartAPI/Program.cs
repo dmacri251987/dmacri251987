@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using Services.ShoppingCartAPI.Repository.Business;
 using Services.ShoppingCartAPI.Repository.Data;
 
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
@@ -22,6 +23,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+
 
 
 // Add services to the container.
