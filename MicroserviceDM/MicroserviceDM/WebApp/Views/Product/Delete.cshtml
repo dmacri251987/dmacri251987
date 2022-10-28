@@ -77,6 +77,6 @@
     <form asp-action="Delete" asp-controller="product">
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <input asp-for="ProductID" asp-route-productId="@Model.ProductID" class="form-control" hidden />
-        <a asp-action="Index">Back to List</a>
+       <button asp-action="Index" class="btn btn-primary">Volver</button>
     </form>
 </div>
