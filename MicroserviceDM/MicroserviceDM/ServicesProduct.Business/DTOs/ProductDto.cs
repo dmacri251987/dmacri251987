@@ -20,10 +20,6 @@ namespace ServicesProduct.Business.DTOs
         public short? ReorderLevel { get; set; }
         public bool Discontinued { get; set; }
         public List<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
-
-        internal T MapTo<T>()
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }

@@ -1,7 +1,30 @@
+using WebApp.Common;
+using WebApp.Services.IServices;
+using WebApp.Services.Services;
+
 var builder = WebApplication.CreateBuilder(args);
+
+StaticDetails.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
+StaticDetails.CategoryAPIBase = builder.Configuration["ServiceUrls:CategoryAPI"];
+StaticDetails.GatewayAPIBase = builder.Configuration["ServiceUrls:GatewayAPI"];
+builder.Services.AddHttpClient<IProductService, ProductService>();
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IGatewayService, GatewayService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+
+var mvcBuilder = builder.Services.AddRazorPages();
+if (builder.Environment.IsDevelopment())
+{
+    mvcBuilder.AddRazorRuntimeCompilation();
+}
+
+
+
+
 
 var app = builder.Build();
 
