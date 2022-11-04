@@ -1,0 +1,95 @@
+﻿@model IEnumerable<WebApp.Models.DTOs.Product.ProductDto>
+
+<br />
+<br />
+<div class="container p-4 border">
+    <div class="row pb-2">
+        <div class="col">
+            <h1 class="text-primary">Listado de Productos</h1>
+        </div>
+        <div class="col text-end pt-1">
+            <a asp-action="Create" class="btn btn-primary"> <img src="~/lib/bootstrap/bootstrap-icons-1.9.1/plus-lg.svg" alt="pen"> Alta Producto</a>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Proveedor
+                </th>
+                <th>
+                    Categoia
+                </th>
+                <th>
+                    Cantidad Percio Unidad
+                </th>
+                <th>
+                    Percio Unidad
+                </th>
+                <th>
+                    En Stock
+                </th>
+                <th>
+                    Cantidad
+                </th>
+                <th>
+                    Discontinuado
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.ProductName
+                    </td>
+                    <td>
+                        @item.SupplierID
+                    </td>
+                    <td>
+                        @item.CategoryID
+                    </td>
+                    <td>
+                        @item.QuantityPerUnit
+                    </td>
+                    <td>
+                        @item.UnitPrice
+                    </td>
+                    <td>
+                        @item.UnitsInStock
+                    </td>
+                    <td>
+                        @item.UnitsOnOrder
+                    </td>
+                    <td>
+
+                        @if (item.Discontinued)
+                        {
+                            <span>Si</span>
+                        }
+                        else
+                        {
+                            <span>No</span>
+                        }
+
+
+                    </td>
+                    <td>
+                      
+                        <a asp-action="Edit" class="btn btn-success" asp-route-productId="@item.ProductID">
+                            <img src="~/lib/bootstrap/bootstrap-icons-1.9.1/pencil-square.svg" alt="pen">
+                        </a>
+                        <a asp-action="GetDelete" asp-controller="Product" class="btn btn-danger" asp-route-productId="@item.ProductID">
+                             <img src="~/lib/bootstrap/bootstrap-icons-1.9.1/trash-fill.svg" alt="pen">
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

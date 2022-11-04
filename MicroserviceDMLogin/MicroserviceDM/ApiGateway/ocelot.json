@@ -1,0 +1,98 @@
+{
+  "Aggregates": [
+    {
+      "UpstreamPathTemplate": "/api/v1/ProductCategories",
+      "RouteKeys": [ "GetProducts", "getCategories" ],
+      "Aggregator": "ProductCategoriesAggregator"
+    },
+    {
+      "UpstreamPathTemplate": "/api/v1/GetProductCategoryById/{id}",
+      "RouteKeys": [ "ProductByIdCategory", "getCategoryById" ],
+      "Aggregator": "ProductCategoriesByIdCategoryAggregator"
+    }
+  ],
+  "Routes": [
+    //ProductApi
+    {
+      "DownstreamPathTemplate": "/api/v1/Product/GetProducts",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7180
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Product/GetProducts",
+      "UpstreamHttpMethod": [ "Get" ],
+      "key": "GetProducts"
+
+    },
+    {
+
+      "DownstreamPathTemplate": "/api/v1/Product/GetProductById/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7180
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Product/GetProductById/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+
+    },
+
+    {
+
+      "DownstreamPathTemplate": "/api/v1/Product/GetProductByIdCategory/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7180
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Product/GetProductByIdCategory/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "Key": "ProductByIdCategory"
+
+    },
+
+    //CategoryApi
+    {
+      "DownstreamPathTemplate": "/api/v1/Category/GetCategories",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7065
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Category/GetCategories",
+      "UpstreamHttpMethod": [ "Get" ],
+      "key": "getCategories"
+    },
+    {
+
+      "DownstreamPathTemplate": "/api/v1/Category/GetCategoryById/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7065
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Category/GetCategoryById/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "key": "getCategoryById"
+
+    }
+
+  ],
+
+  "GlobalConfiguration": {
+
+    "BaseUrl": "https://localhost:7014"
+  }
+}
+
