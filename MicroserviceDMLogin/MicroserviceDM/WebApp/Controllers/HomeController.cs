@@ -13,6 +13,8 @@ namespace WebApp.Controllers
             _logger = logger;
         }
 
+
+        #region ActionResult
         public IActionResult Index()
         {
             return View();
@@ -28,5 +30,7 @@ namespace WebApp.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        #endregion
     }
 }

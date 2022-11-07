@@ -18,6 +18,8 @@ namespace ServicesIdentity.API.Controllers
             this._response = new ResponseDto();
         }
 
+        #region ActionResult
+
         [HttpGet("GetUsers")]
         public async Task<ActionResult<ResponseDto>> GetUsers()
         {
@@ -49,7 +51,7 @@ namespace ServicesIdentity.API.Controllers
 
             try
             {
-               UserDto userDto = new UserDto();
+                UserDto userDto = new UserDto();
                 userDto = await _userService.GetUserByIdAsync(id);
                 _response.Result = userDto;
                 _response.IsSuccess = true;
@@ -123,6 +125,6 @@ namespace ServicesIdentity.API.Controllers
             return Ok(_response);
         }
 
-
+        #endregion
     }
 }

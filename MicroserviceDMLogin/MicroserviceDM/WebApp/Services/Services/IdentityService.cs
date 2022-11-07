@@ -47,5 +47,15 @@ namespace WebApp.Services.Services
 
             });
         }
+
+        public async Task<T> RefreshTokenAsync<T>()
+        {
+            return await this.SendAsync<T>(new ApiRequest
+            {
+                apiType = StaticDetails.ApiType.POST,               
+                url = StaticDetails.AuthenticaAPIBase + "api/v1/Authenticate/refresh-token"
+
+            });
+        }
     }
 }

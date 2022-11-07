@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using WebApp.Common;
 using WebApp.Models.DTOs.Identity;
@@ -12,45 +15,69 @@ namespace WebApp.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IGatewayService _gatewayService;
         private readonly IIdentityService _identityService;
+        private readonly IConfiguration _configuration;
 
-        public AuthenticateController(IGatewayService gatewayService, IIdentityService identityService, ILogger<HomeController> logger)
+        public AuthenticateController(IGatewayService gatewayService, IIdentityService identityService, ILogger<HomeController> logger, IConfiguration configuration)
         {
             _gatewayService = gatewayService;
             _identityService = identityService;
             _logger = logger;
+            _configuration = configuration;
         }
 
 
+        #region ActionResult
+
+        [HttpGet]
+        public async Task<IActionResult> Index(LoginDto loginDto)
+        {
+
+            return View();
+
+        }
+
 
         [HttpPost]
+        [Route("/login")]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {
 
             try
             {
-                var token = await _identityService.Login<string>(loginDto);
+                Token tokenClass = new Token();
 
+                var loginValid = ValidateLogin(loginDto);
 
-                //Guardo Token en las cookies
-                var tokenResult = GeToken(token.ToString());
-                SetCookiesToken(tokenResult);
-
-
-
-                //Guardo el refresh token en las cookies
-                var refreshToken = GetRefreshToken();                      
-                SetRefreshToken(refreshToken);
-
-
-
-                HttpContext.Session.SetString("tokenString", token);
-
-
-                //var tk = Request.Cookies["token"];
-
-                if (token != "")
+                if (!loginValid)
                 {
-                    return RedirectToAction("Index", controllerName: "Product");
+                    TempData["LoginFailed"] = $"The username or password is incorrect.";
+
+                    return Redirect("/login");
+                }
+                else
+                {
+
+                    var token = await _identityService.Login<string>(loginDto);
+
+                    if (token != "")
+                    {
+                        await SignInUser(loginDto.UserName);
+
+                    }
+                    //Guardo Token en las cookies
+                    var tokenResult = new Token().GeToken(token.ToString());
+                    SetCookiesToken(tokenResult);
+
+
+                    HttpContext.Session.SetString("tokenString", token);
+
+
+                    //var tk = Request.Cookies["token"];
+
+                    if (token != "")
+                    {
+                        return RedirectToAction("Index", controllerName: "Product");
+                    }
                 }
 
                 return View();
@@ -66,23 +93,43 @@ namespace WebApp.Controllers
 
         }
 
+        #endregion
 
 
-        private Token GeToken(string token)
+
+
+        #region Private
+        [HttpPost]
+        public async Task<IActionResult> Logout()
         {
-            var tokenResult = new Token
-            {
-                TokenString = token,
-                Expires = DateTime.Now.AddDays(7),
-                Created = DateTime.Now
-
-            };
-
-            return tokenResult;
-
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Index", "Authenticate");
         }
 
-   
+        private bool ValidateLogin(LoginDto loginDto)
+        {
+            //Falta las validaciones
+            return true;
+        }
+
+        //Claim que pide asp para poder authenticar
+        private async Task SignInUser(string username)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, username),
+                new Claim("authenticate_cookies", username)
+            };
+
+            var claimsIdentity = new ClaimsIdentity(
+                claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity));
+        }
+
+
 
         private void SetCookiesToken(Token token)
         {
@@ -97,31 +144,8 @@ namespace WebApp.Controllers
 
         }
 
-        private Token GetRefreshToken()
-        {
-            var refreshToken = new Token
-            {
-                TokenString = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
-                Expires = DateTime.Now.AddDays(7),
-                Created = DateTime.Now
+        #endregion
 
-            };
-
-            return refreshToken;
-
-        }
-
-        private void SetRefreshToken(Token newRefreshToken)
-        {
-
-            var cookieOptions = new CookieOptions
-            {
-                HttpOnly = true,
-                Expires = newRefreshToken.Expires
-            };
-            Response.Cookies.Append("refreshToken", newRefreshToken.TokenString, cookieOptions);
-
-        }
 
     }
 }

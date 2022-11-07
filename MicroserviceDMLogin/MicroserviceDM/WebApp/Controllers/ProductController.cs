@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Security.Claims;
+using WebApp.Common;
 using WebApp.Models.DTOs;
 using WebApp.Models.DTOs.Identity;
 using WebApp.Models.DTOs.Product;
@@ -8,32 +10,34 @@ using WebApp.Services.IServices;
 
 namespace WebApp.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
         private readonly IGatewayService _gatewayService;
         private readonly IIdentityService _identityService;
-    
+        //private string token;
+
         public ProductController(IProductService productService, IGatewayService gatewayService, IIdentityService identityService)
         {
             _productService = productService;
             _gatewayService = gatewayService;
             _identityService = identityService;
+          //  this.token = HttpContext.Request.Cookies["tokenString"];
         }
+
+
+        #region ActionResult
 
         public async Task<IActionResult> Index()
         {
             List<ProductDto> list = new List<ProductDto>();
 
-
             var token = HttpContext.Request.Cookies["tokenString"];
-
-            //otra opcion variable de sesion
-            //string token = HttpContext.Session.GetString("tokenString");
-
+            token = await RefreshToken(token);
 
             var response = await _productService.GetProductsAsync<ResponseDto>(token);
-         
+
             //Ejemplo de llamado del api Gateway            
             //var response3 = await _gatewayService.GetProductsCategories<ProductDto>();
 
@@ -60,8 +64,8 @@ namespace WebApp.Controllers
 
             ProductDto response = new ProductDto();
 
-
             var token = HttpContext.Request.Cookies["tokenString"];
+            token = await RefreshToken(token);
 
             if (productDto.ProductID == 0)
             {
@@ -89,6 +93,8 @@ namespace WebApp.Controllers
             ProductDto response = new ProductDto();
 
             var token = HttpContext.Request.Cookies["tokenString"];
+            token = await RefreshToken(token);
+
 
             if (productDto.ProductID > 0)
             {
@@ -134,7 +140,10 @@ namespace WebApp.Controllers
 
             if (productId > 0)
             {
-                response = await _productService.GetProductByIdAsync<ProductDto>(productId);
+                var token = HttpContext.Request.Cookies["tokenString"];
+                token = await RefreshToken(token);
+
+                response = await _productService.GetProductByIdAsync<ProductDto>(productId, token);
             }
 
             if (!response.IsSuccess)
@@ -169,6 +178,37 @@ namespace WebApp.Controllers
             return RedirectToAction(nameof(Index));
 
         }
+
+        #endregion
+
+
+
+        #region Private
+
+        private async Task<string> RefreshToken(string token)
+        {
+            if (token == null || token == "")
+
+            {
+                token = await _identityService.RefreshTokenAsync<string>();
+            }
+
+
+            var result = new Token().GeToken(token.ToString());
+
+            var cookieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = result.Expires
+            };
+
+
+            Response.Cookies.Append("tokenString", token, cookieOptions);
+
+            return token;
+        }
+
+        #endregion
 
     }
 }

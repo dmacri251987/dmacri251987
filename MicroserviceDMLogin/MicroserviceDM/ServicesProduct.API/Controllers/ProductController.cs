@@ -12,7 +12,7 @@ namespace ServicesProduct.API.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly IProductService _productService;      
+        private readonly IProductService _productService;
         protected ResponseDto _response;
 
 
@@ -24,7 +24,7 @@ namespace ServicesProduct.API.Controllers
 
 
 
-
+        #region ActionResult
         [HttpGet("GetProducts")]
         [Authorize]
         public async Task<ActionResult<ResponseDto>> GetProducts()
@@ -160,5 +160,7 @@ namespace ServicesProduct.API.Controllers
             }
             return Ok(_response);
         }
+
+        #endregion
     }
 }

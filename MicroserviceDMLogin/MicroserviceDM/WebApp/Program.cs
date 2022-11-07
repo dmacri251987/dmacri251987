@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using WebApp.Common;
 using WebApp.Services.IServices;
 using WebApp.Services.Services;
@@ -25,6 +26,15 @@ if (builder.Environment.IsDevelopment())
 }
 
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+        options.SlidingExpiration = true;
+        options.AccessDeniedPath = "/Forbidden/";
+        options.LogoutPath = "/Home/Login";
+        options.Cookie.Name = "authenticate_cookies";
+    });
 
 
 builder.Services.AddSession();
@@ -44,12 +54,13 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Authenticate}/{action=Index}/{id?}");
 
 app.Run();

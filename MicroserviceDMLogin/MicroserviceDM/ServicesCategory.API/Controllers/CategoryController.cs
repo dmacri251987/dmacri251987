@@ -22,6 +22,7 @@ namespace ServicesCategory.API.Controllers
 
         }
 
+        #region ActionResult
         [HttpGet("GetCategories")]
         public async Task<ActionResult<ResponseDto>> GetCategories()
         {
@@ -126,5 +127,7 @@ namespace ServicesCategory.API.Controllers
             }
             return Ok(_response);
         }
+
+        #endregion
     }
 }
