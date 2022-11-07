@@ -107,7 +107,7 @@ namespace ServicesIdentity.API.Controllers
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.KeyPrivate));
                 var singIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
                 //var token = new JwtSecurityToken(jwt.Issuer, jwt.Audience, claims, expires: DateTime.Now.AddMinutes(120));
-                var token = new JwtSecurityToken(claims: claims, expires: DateTime.Now.AddMinutes(120), signingCredentials: singIn);
+                var token = new JwtSecurityToken(claims: claims, expires: DateTime.Now.AddDays(1), signingCredentials: singIn);
                 
 
 

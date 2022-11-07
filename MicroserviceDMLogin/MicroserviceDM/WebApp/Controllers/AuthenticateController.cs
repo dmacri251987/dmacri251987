@@ -62,17 +62,11 @@ namespace WebApp.Controllers
                     if (token != "")
                     {
                         await SignInUser(loginDto.UserName);
+                        token = await RefreshToken(token.ToString());
 
-                    }
-                    //Guardo Token en las cookies
-                    var tokenResult = new Token().GeToken(token.ToString());
-                    SetCookiesToken(tokenResult);
+                    }               
+                             
 
-
-                    HttpContext.Session.SetString("tokenString", token);
-
-
-                    //var tk = Request.Cookies["token"];
 
                     if (token != "")
                     {
@@ -93,10 +87,10 @@ namespace WebApp.Controllers
 
         }
 
+
         #endregion
 
-
-
+        
 
         #region Private
         [HttpPost]
@@ -111,6 +105,7 @@ namespace WebApp.Controllers
             //Falta las validaciones
             return true;
         }
+
 
         //Claim que pide asp para poder authenticar
         private async Task SignInUser(string username)
@@ -131,19 +126,30 @@ namespace WebApp.Controllers
 
 
 
-        private void SetCookiesToken(Token token)
+        private async Task<string> RefreshToken(string token)
         {
+            if (token == null || token == "")
 
-            var cookieOptions = new CookieOptions
             {
-                HttpOnly = true,
-                Expires = token.Expires
-            };
-            Response.Cookies.Append("tokenString", token.TokenString, cookieOptions);
+                token = await _identityService.RefreshTokenAsync<string>();
+            }
+
+            var tokenObj =  new Token().GeToken(token.ToString());
 
 
+            //Guardo Token en las cookies
+            var cookieOptions = tokenObj.SetCookiesToken(tokenObj);
+
+            if (cookieOptions != null)
+            {
+                Response.Cookies.Append("tokenString", token, cookieOptions);
+            }
+
+
+            Response.Cookies.Append("tokenString", token, cookieOptions);
+
+            return token;
         }
-
         #endregion
 
 

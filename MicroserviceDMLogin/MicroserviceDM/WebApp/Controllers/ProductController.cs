@@ -16,14 +16,13 @@ namespace WebApp.Controllers
         private readonly IProductService _productService;
         private readonly IGatewayService _gatewayService;
         private readonly IIdentityService _identityService;
-        //private string token;
+     
 
         public ProductController(IProductService productService, IGatewayService gatewayService, IIdentityService identityService)
         {
             _productService = productService;
             _gatewayService = gatewayService;
-            _identityService = identityService;
-          //  this.token = HttpContext.Request.Cookies["tokenString"];
+            _identityService = identityService;          
         }
 
 
@@ -35,6 +34,11 @@ namespace WebApp.Controllers
 
             var token = HttpContext.Request.Cookies["tokenString"];
             token = await RefreshToken(token);
+
+            if (token == null)
+            {
+                return NotFound();
+            }
 
             var response = await _productService.GetProductsAsync<ResponseDto>(token);
 
@@ -67,7 +71,7 @@ namespace WebApp.Controllers
             var token = HttpContext.Request.Cookies["tokenString"];
             token = await RefreshToken(token);
 
-            if (productDto.ProductID == 0)
+            if (productDto.ProductID == 0 && token != null)
             {
 
                 response = await _productService.CreateProductAsync<ProductDto>(productDto, token.ToString());
@@ -193,14 +197,16 @@ namespace WebApp.Controllers
                 token = await _identityService.RefreshTokenAsync<string>();
             }
 
+            var tokenObj = new Token().GeToken(token.ToString());
 
-            var result = new Token().GeToken(token.ToString());
 
-            var cookieOptions = new CookieOptions
+            //Guardo Token en las cookies
+            var cookieOptions = new Token().SetCookiesToken(tokenObj);
+
+            if (cookieOptions != null)
             {
-                HttpOnly = true,
-                Expires = result.Expires
-            };
+                Response.Cookies.Append("tokenString", token, cookieOptions);
+            }
 
 
             Response.Cookies.Append("tokenString", token, cookieOptions);
