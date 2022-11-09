@@ -18,6 +18,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IGatewayService, GatewayService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IIdentityService, IdentityService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var mvcBuilder = builder.Services.AddRazorPages();
 if (builder.Environment.IsDevelopment())

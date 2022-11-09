@@ -49,7 +49,7 @@ namespace WebApp.Controllers
             {
                 list = JsonConvert.DeserializeObject<List<ProductDto>>(Convert.ToString(response.Result));
             }
-
+            
             return View(list);
         }
 
